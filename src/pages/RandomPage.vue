@@ -1,12 +1,6 @@
 <template>
   <div class="random">
     <div class="select">
-      <a-select
-        v-model:value="value"
-        :options="options"
-        style="width: 200px"
-        @change="handleChange"
-      ></a-select>
       <a-row type="flex" align="left">
         <a-col style="margin-right: 8px">抽题范围: </a-col>
         <a-col flex="auto">
@@ -41,7 +35,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import type { TreeSelectProps, SelectProps } from 'ant-design-vue'
+import type { TreeSelectProps } from 'ant-design-vue'
 import { TreeSelect, message } from 'ant-design-vue'
 
 import {
@@ -151,37 +145,6 @@ const loadHistory = () => {
     message.info("已自动加载上次选择的抽题范围了")
   }
 }
-
-const handleChange = (value: string) => {
-  console.log(`selected ${value}`);
-};
-
-const options: SelectProps['options'] = [
-  {
-    label: 'Manager',
-    options: [
-      {
-        value: 'jack',
-        label: 'Jack111',
-      },
-      {
-        value: 'lucy',
-        label: 'Lucy111',
-      },
-    ],
-  },
-  {
-    label: 'Engineer',
-    options: [
-      {
-        value: 'yiminghe',
-        label: 'Yiminghe',
-      },
-    ],
-  },
-];
-
-const value = ref(['lucy']);
 
 onMounted(() => {
   loadHistory()

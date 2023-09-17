@@ -8,7 +8,6 @@ export const globalStore = defineStore("saveLevel", {
         mode: "path",
         data: <Array<Array<string | null>> | null>null
       },
-      save: <Array<Object>>[],
     };
   },
   actions: {
