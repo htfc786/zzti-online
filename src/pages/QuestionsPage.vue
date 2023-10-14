@@ -19,7 +19,15 @@
       <a-list item-layout="horizontal" :data-source="questionData">
         <template #renderItem="{ item, index }">
           <a-list-item>
-            <span class="d-item">{{ index + 1 }}、{{ item }}</span>
+            <span class="d-item">{{ index + 1 }}、{{ item.q }}</span>
+            <div v-if="item.ans">
+              <a-popover title="答案查看" trigger="click" placement="left">
+                <template #content>
+                  <span>{{ item.ans }}</span>
+                </template>
+                <a-button size="small">答案</a-button>
+              </a-popover>
+            </div>
           </a-list-item>
         </template>
       </a-list>
@@ -94,13 +102,13 @@ const gotoPathByIndex = (index: number) => {
   background-color: #000 !important;
   color: #fff !important
 }
-.dark .ant-menu::v-deep .ant-menu-item-selected {
+.dark .ant-menu :deep(.ant-menu-item-selected) {
   background-color: #333 !important;
 }
-.dark .ant-menu::v-deep .ant-menu-submenu-title:hover {
+.dark .ant-menu :deep(.ant-menu-submenu-title:hover) {
   color: rgba(255, 255, 255, 0.88);
 }
-.dark .ant-breadcrumb::v-deep .ant-breadcrumb-separator {
+.dark .ant-breadcrumb :deep(.ant-breadcrumb-separator) {
   color: rgba(255, 255, 255, 0.45);
 }
 </style>
