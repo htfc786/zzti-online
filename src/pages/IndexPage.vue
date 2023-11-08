@@ -20,9 +20,7 @@
       <a-row type="flex" align="center" class="q-num">
         <a-col>题目数量: </a-col>
         <a-col v-for="num in numList">
-          <a-button size="small" @click="randQuesByNum(num)">{{
-            num
-          }}</a-button>
+          <a-button size="small" @click="randQuesByNum(num)">{{ num }}</a-button>
         </a-col>
         <a-col>
           <a-button size="small" @click="randQuesByNum(0)">全部</a-button>
@@ -31,9 +29,7 @@
           <a-input-number v-model:value="questionNum" :min="1" />
         </a-col>
         <a-col>
-          <a-button type="primary" size="large" @click="randQues()"
-            >生成！</a-button
-          >
+          <a-button type="primary" size="large" @click="randQues()">生成！</a-button >
         </a-col>
       </a-row>
     </div>
@@ -53,7 +49,7 @@
           <template #renderItem="{ item, index }">
             <a-list-item>
               <h1 class="d-item" :style="{ 'font-size': fontSize + 'px' }">
-                {{ index + 1 }}、{{ item }}
+                {{ index + 1 }}、{{ item.q }}
               </h1>
             </a-list-item>
           </template>

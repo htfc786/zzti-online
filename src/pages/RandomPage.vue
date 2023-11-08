@@ -27,12 +27,17 @@
     <div class="bottom">
       <fontResize v-model:value="fontSize" />
       <div class="btn-area">
-        <a-popover title="答案查看" trigger="click" placement="top">
-          <template #content>
-            <span class="ans-text">{{ question.ans ? question.ans : "无" }}</span>
-          </template>
-          <a-button class="ans-btn" size="small">答案</a-button>
-        </a-popover>
+        <template v-if="question.ans">
+          <a-popover title="答案查看" trigger="click" placement="top">
+            <template #content>
+              <span class="ans-text">{{ question.ans }}</span>
+            </template>
+            <a-button class="ans-btn" size="small">答案</a-button>
+          </a-popover>
+        </template>
+        <template v-else>
+          <a-button class="ans-btn" size="small" disabled>答案</a-button>
+        </template>
         <a-button class="rand-btn" type="primary" size="large" @click="randQues()"
           >再来一道</a-button
         >
@@ -89,6 +94,7 @@ watch(treeValue, () => {
   store.history.data = pathList
 })
 
+// 排序记录清零
 watch(isOrder, () => {
   orderIndex = 0
 })
@@ -112,6 +118,7 @@ const orderQues = () => {
   orderIndex++
 }
 
+// 随机抽取题目
 const randQues = () => {
   isLoading.value = true
   setTimeout(() => {
@@ -155,8 +162,9 @@ const loadHistory = () => {
 }
 
 onMounted(() => {
+  // 加载历史记录
   loadHistory()
-
+  // 自动抽取题目
   randQues()
 })
 </script>
