@@ -21,7 +21,7 @@
           <a-list-item>
             <span class="d-item">{{ index + 1 }}、{{ item.q }}</span>
             <div v-if="item.ans">
-              <a-popover title="答案查看" trigger="click" placement="left">
+              <a-popover title="答案查看" trigger="click" placement="bottomRight">
                 <template #content>
                   <span>{{ item.ans }}</span>
                 </template>
