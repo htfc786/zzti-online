@@ -105,7 +105,6 @@ watch(treeValue, () => {
 
 watch(treeValue, () => {
   //保存历史记录
-  store.history.mode = "path"
   store.history.data = pathList
 })
 
@@ -156,23 +155,22 @@ const loadHistory = () => {
   let history = store.history
   if (!history.data) {
     return;
-  } else if (history.mode == "path") {
-    const { pathList: newPathList, error, del } = checkPathList(history.data)
-    if (error) {
-      // 错误
-      if (del) {
-        const msg = `不存在的路径 ${del.join(", ")} ，已自动删除`
-        message.warn(msg)
-      }
-      history.data = newPathList;
-    }
-    if (history.data.length == 0){
-      return;
-    }
-    pathList = history.data
-    treeValue.value = getTreeValueListByPathList(history.data)
-    message.info("已自动加载上次选择的抽题范围了")
   }
+  const { pathList: newPathList, error, del } = checkPathList(history.data)
+  if (error) {
+    // 错误
+    if (del) {
+      message.warn(`不存在的路径 ${del.join(", ")} ，已自动从历史记录中删除`)
+    }
+    history.data = newPathList;
+  }
+  
+  if (history.data.length == 0){
+    return;
+  }
+  pathList = history.data
+  treeValue.value = getTreeValueListByPathList(history.data)
+  message.info("已自动加载上次选择的抽题范围了")
 }
 
 onMounted(() => {

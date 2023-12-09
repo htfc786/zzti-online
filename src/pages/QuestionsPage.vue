@@ -20,7 +20,7 @@
         <template #renderItem="{ item, index }">
           <a-list-item>
             <span class="d-item">{{ index + 1 }}、{{ item.q }}</span>
-            <div v-if="item.ans">
+            <div v-if="item.ans" style="margin-left: 8px;">
               <a-popover title="答案查看" trigger="click" placement="bottomRight">
                 <template #content>
                   <span>{{ item.ans }}</span>
