@@ -11,6 +11,11 @@ export const globalStore = defineStore("zzti_globalStore", {
       oneQuesMode: <string>"null"
     };
   },
+  actions: {
+    readSavePath() {
+      
+    },
+  },
   persist: {
     //存储位置
     key: "zzti_globalStore",

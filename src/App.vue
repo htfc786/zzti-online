@@ -1,11 +1,11 @@
 <template>
   <div class="main">
     <a-row class="header" type="flex" align="middle">
-      <a-col flex="200px" style="margin: 0 auto">
+      <a-col flex="120px" style="margin: 0 auto">
         <RouterLink to="/">
           <a-row align="middle">
             <img src="/vite.svg" alt="vite.svg" />
-            <span class="title">Vite + Vue + TS</span>
+            <span class="title">zzti-web</span>
           </a-row>
         </RouterLink>
       </a-col>
@@ -18,6 +18,11 @@
           <a-menu-item key="/index">默写</a-menu-item>
           <a-menu-item key="/random">抽题</a-menu-item>
           <a-menu-item key="/questions">列表</a-menu-item>
+          <a-menu-item key="/card">卡片</a-menu-item>
+          <a-sub-menu title="工具">
+            <a-menu-item key="/tools/word">单词解析</a-menu-item>
+            <a-menu-item key="/tools/wyw">文言实词解析</a-menu-item>
+          </a-sub-menu>
           <a-menu-item>
             <a href="https://github.com/htfc786/zzti-web" target="_blank">
               <github-outlined /> 代码开源
@@ -30,10 +35,10 @@
       <router-view />
     </div>
     <div class="footer">
-      <span><TJzk2024/></span>
+      <span><TJgk2027/></span>
       <span>备注：{{ notes }}</span>
       <span><a href="https://github.com/htfc786/zzti-web" target="_blank">zzti-web</a> - 帮政治老师开发的默写抽题系统 by htfc786</span>
-      <span>前端代码感谢：<a href="https://github.com/liyupi/sql-mother" target="_blank">SQL之母</a> by 鱼皮</span>
+      <span>前端代码参考：<a href="https://github.com/liyupi/sql-mother" target="_blank">SQL之母</a> by 鱼皮</span>
       <span>本站使用Github搭建</span>
       <span><a-switch v-model:checked="dark_mode" />夜间模式</span>
     </div>
@@ -42,22 +47,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { GithubOutlined } from '@ant-design/icons-vue';
 import { storeToRefs } from 'pinia'
 
-import TJzk2024 from './components/2024TJzk.vue';
 import { globalStore } from './core/globalStore.ts'
 import { isSupportedCssVariable } from './core/tools';
-import { note as questionNote } from './core/question';
+import { questionNote } from './questions/questions';
+import TJgk2027 from './components/2027TJgk.vue';
 
 const store = globalStore();
 const route = useRoute();
 const router = useRouter();
 
 const notes = ref<string>(questionNote);
-// const notes = ref<string>("暂无信息");
 
 //夜间模式
 const dark_mode = storeToRefs(store).dark_mode;
@@ -75,6 +79,18 @@ const changeContentMinHeight = () => {
     content.style.setProperty('--content-min-height', (contentMinHeight - allMargin) + "px");
   }
 };
+
+const initChangeContentMinHeight = () => {
+  window.onresize = function() {
+    changeContentMinHeight();
+  };
+
+  changeContentMinHeight();
+};
+
+onMounted(() => {
+  initChangeContentMinHeight()
+});
 
 // 显示蓝条url
 const selectedKeys = computed(() => {
@@ -101,14 +117,6 @@ watch(dark_mode, ()=>{
     document.body.classList.remove("dark")
   }
 }, { immediate: true });
-
-onMounted(() => {
-  window.addEventListener("resize", changeContentMinHeight);
-  changeContentMinHeight();
-});
-onUnmounted(() => {
-  window.removeEventListener("resize", changeContentMinHeight);
-});
 </script>
 
 <style scoped>

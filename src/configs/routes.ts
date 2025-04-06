@@ -20,6 +20,23 @@ export default [
     path: "/questions",
     component: () => import("../pages/QuestionsPage.vue"),
   },
+  {
+    path: "/card",
+    component: () => import("../pages/CardPage.vue"),
+  },
+  {
+    path: "/tools",
+    children: [
+      {
+        path: "word",
+        component: () => import("../pages/tools/word.vue"),
+      },
+      {
+        path: "wyw",
+        component: () => import("../pages/tools/wyw.vue"),
+      },
+    ]
+  },
   // 404页面
   {
     path: "/404",

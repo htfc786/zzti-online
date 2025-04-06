@@ -1,5 +1,5 @@
 import { randint } from '../core/tools'
-import { getQuestionByPath } from './question';
+import { getQuestionByPath } from '../questions';
 
 /**
  * 根据题目列表随机一道题

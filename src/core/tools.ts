@@ -1,5 +1,3 @@
-import { VueElement } from 'vue'
-import type { ItemType } from 'ant-design-vue'
 /**
  * 判断对象里是否存在key
  * 解决 元素隐式具有 "any" 类型，因为类型为 "string" 的表达式不能用于索引类型 报错问题
@@ -9,7 +7,7 @@ import type { ItemType } from 'ant-design-vue'
  * @return 是否存在
  */
 export function isValidKey(
-  key: any,
+  key: string | number | symbol,
   object: object
 ): key is keyof typeof object {
   return key in object
@@ -45,29 +43,4 @@ export function randint(minNum: number, maxNum: number): number {
       return 0
       break
   }
-}
-
-/**
- * 用于创建menu一个对象
- * @param label 标题
- * @param key key
- * @param icon 图标
- * @param children 子项
- * @param type 类型 group组型
- * @return 创建的menu对象
- */
-export const getMenuItem = (
-  label: VueElement | string,
-  key: string,
-  icon?: any,
-  children?: ItemType[],
-  type?: 'group'
-): ItemType => {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  } as ItemType
 }
