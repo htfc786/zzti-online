@@ -1,0 +1,1 @@
+import{_ as t}from"./index-15b4e44c.js";const _={};function o(s,c){const e=Vue.resolveComponent("a-result");return Vue.openBlock(),Vue.createBlock(e,{status:"404",title:"404","sub-title":"当前页面不存在！"})}const a=t(_,[["render",o],["__scopeId","data-v-5edf2fb8"]]);export{a as default};
